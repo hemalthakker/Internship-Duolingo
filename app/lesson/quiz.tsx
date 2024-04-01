@@ -58,11 +58,13 @@ export const Quiz = ({
     _c,
     correctControls,
   ] = useAudio({ src: "/correct.wav" });
+
   const [
     incorrectAudio,
     _i,
     incorrectControls,
   ] = useAudio({ src: "/incorrect.wav" });
+
   const [pending, startTransition] = useTransition();
 
   const [lessonId] = useState(initialLessonId);
@@ -143,7 +145,7 @@ export const Quiz = ({
              return;
            }
 
-           
+           incorrectControls.play();
            setStatus("wrong");
 
           if (!response?.error) {
@@ -156,6 +158,31 @@ export const Quiz = ({
   };
 
 
+  if(true || !challenge)
+  {
+    return(
+      <>
+       <div className="flex flex-col gap-y-4 lg:gap-y-8 max-w-lg mx-auto text-center items-center justify-center h-full">
+        <Image 
+        src="/finish.svg"
+        alt="Finish"
+        className="hidden lg:block"
+        height={100}
+        width={100}
+        />
+        <Image 
+        src="/finish.svg"
+        alt="Finish"
+        className="hidden lg:hidden"
+        height={50}
+        width={50}
+        />
+       </div>
+      </>
+    )
+  }
+
+
   const title = challenge.type === "ASSIST" 
     ? "Select the correct meaning"
     : challenge.question;
@@ -166,7 +193,8 @@ export const Quiz = ({
       {correctAudio}
       <Header
         hearts={hearts}
-        percentage={percentage} hasActiveSubscription={false}      //  hasActiveSubscription={!!userSubscription?.isActive}
+        percentage={percentage}
+        hasActiveSubscription={!!userSubscription?.isActive}
       />
       <div className="flex-1">
         <div className="h-full flex items-center justify-center">
