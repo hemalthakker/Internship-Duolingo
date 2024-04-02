@@ -2,7 +2,7 @@
 
 import { toast } from "sonner";
 import Image from "next/image";
-//import Confetti from "react-confetti";
+import Confetti from "react-confetti";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import { useAudio, useWindowSize, useMount } from "react-use";
@@ -19,6 +19,7 @@ import { Challenge } from "./challenge";
 //import { ResultCard } from "./result-card";
 import { QuestionBubble } from "./question-bubble";
 import { reduceHearts } from "@/actions/user-progress";
+import { ResultCard } from "./result-card";
 
 type Props ={
   initialPercentage: number;
@@ -66,7 +67,6 @@ export const Quiz = ({
   ] = useAudio({ src: "/incorrect.wav" });
 
   const [pending, startTransition] = useTransition();
-
   const [lessonId] = useState(initialLessonId);
   const [hearts, setHearts] = useState(initialHearts);
   const [percentage, setPercentage] = useState(() => {
@@ -158,10 +158,19 @@ export const Quiz = ({
   };
 
 
-  if(true || !challenge)
+  if(!challenge)
   {
     return(
       <>
+        {finishAudio}
+        <Confetti
+        width={width}
+        height={height}
+        recycle={false}
+        numberOfPieces={500}
+        tweenDuration={10000}
+      />
+
        <div className="flex flex-col gap-y-4 lg:gap-y-8 max-w-lg mx-auto text-center items-center justify-center h-full">
         <Image 
         src="/finish.svg"
@@ -178,6 +187,27 @@ export const Quiz = ({
         width={50}
         />
        </div>
+       <h1 className="text-xl lg:text-3xl font-bold text-neutral-700">
+        Great Job!<br/>
+        You have completed the lesson.
+       </h1>
+       <div className="flex items-center gap-x-4 w-full">
+       <ResultCard 
+        variant="points"
+        value={challenges.length * 10}
+       />
+
+       <ResultCard 
+        variant="hearts"
+        value={hearts}
+       />
+
+       </div>
+       <Footer
+       lessonId={lessonId}
+       status="completed"
+       onCheck={()=> router.push("/learn")}
+       />
       </>
     )
   }
