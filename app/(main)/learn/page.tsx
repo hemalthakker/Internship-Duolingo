@@ -1,4 +1,4 @@
-import { FeedWraper } from "@/components/feed-wrapper";
+import { FeedWrapper } from "@/components/feed-wrapper";
 import { StickyWrapper } from "@/components/sticky-wrapper";
 import { Header } from "./header";
 import { UserProgress } from "@/components/user-progress";
@@ -57,7 +57,7 @@ const LearnPage = async () => {
                
             </StickyWrapper>
 
-            <FeedWraper>
+            <FeedWrapper>
                <Header title={userProgress.activeCourse.title}/>
                
                {units.map((unit) => (
@@ -75,7 +75,7 @@ const LearnPage = async () => {
               </div>
         ))}
                
-            </FeedWraper>
+            </FeedWrapper>
         </div>
     );
 }
