@@ -32,6 +32,18 @@ type Props = {
          });
       };
 
+      const onUpgrade = () => {
+        startTransition(() => {
+          createStripeUrl()
+            .then((response) => {
+              if (response.data) {
+                window.location.href = response.data;
+              }
+            })
+            .catch(() => toast.error("Something went wrong"));
+        });
+      };
+
     return(
 
         <ul className="w-full">
@@ -76,7 +88,7 @@ type Props = {
           }
         </Button>
       </div>
-      {/* <div className="flex items-center w-full p-4 pt-8 gap-x-4 border-t-2">
+      <div className="flex items-center w-full p-4 pt-8 gap-x-4 border-t-2">
         <Image
           src="/unlimited.svg"
           alt="Unlimited"
@@ -94,7 +106,7 @@ type Props = {
         >
           {hasActiveSubscription ? "settings" : "upgrade"}
         </Button>
-      </div> */}
+      </div>
     </ul>
     )
   }
