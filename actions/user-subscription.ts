@@ -47,6 +47,7 @@ export const createStripeUrl = async () => {
         },
       },
     ],
+    //imp
     metadata: {
       userId,
     },
@@ -55,4 +56,4 @@ export const createStripeUrl = async () => {
   });
 
   return { data: stripeSession.url };
-};
+}; 
