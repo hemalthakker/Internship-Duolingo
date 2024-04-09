@@ -223,6 +223,7 @@ const DAY_IN_MS = 86_400_000;
 export const getUserSubscription = cache(async () => {
   const { userId } = await auth();
 
+
   if (!userId) return null;
 
   const data = await db.query.userSubscription.findFirst({
@@ -234,6 +235,10 @@ export const getUserSubscription = cache(async () => {
   const isActive = 
     data.stripePriceId &&
     data.stripeCurrentPeriodEnd?.getTime()! + DAY_IN_MS > Date.now();
+
+    // for in active
+
+
 
   return {
     ...data,
