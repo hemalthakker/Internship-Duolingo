@@ -236,9 +236,6 @@ export const getUserSubscription = cache(async () => {
     data.stripePriceId &&
     data.stripeCurrentPeriodEnd?.getTime()! + DAY_IN_MS > Date.now();
 
-    // for in active
-
-
 
   return {
     ...data,
