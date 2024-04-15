@@ -7,6 +7,8 @@ import { StickyWrapper } from "@/components/sticky-wrapper";
 import { getTopTenUsers, getUserProgress, getUserSubscription } from "@/db/queries";
 import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { Promo } from "@/components/promo";
+import { Quests } from "@/components/quests";
 //import { Promo } from "@/components/promo";
 //import { Quests } from "@/components/quests";
 
@@ -40,10 +42,16 @@ const LearderboardPage = async () => {
           points={userProgress.points}
           hasActiveSubscription={isPro}
         />
-        {/* {!isPro && (
-          <Promo />
+        
+        {!isPro && (
+
+        <Promo/>
+
         )}
-        <Quests points={userProgress.points} /> */}
+
+<Quests points={userProgress.points} />
+
+       
       </StickyWrapper>
       <FeedWrapper>
         <div className="w-full flex flex-col items-center">
