@@ -1,8 +1,8 @@
-import { Create, Datagrid, List, SimpleForm, TextField, TextInput, required } from "react-admin";
+import { Create, Datagrid, Edit, List, SimpleForm, TextField, TextInput, required } from "react-admin";
 
 export const CourseEdit = () => {
     return(
-    <Create>
+    <Edit>
         <SimpleForm>
             <TextInput 
             source="id" 
@@ -15,6 +15,6 @@ export const CourseEdit = () => {
             label="Image" />
             
         </SimpleForm>
-    </Create>
+    </Edit>
     )
 }

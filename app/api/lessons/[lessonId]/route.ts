@@ -1,12 +1,12 @@
 import db from "@/db/drizzle";
-import {courses} from "@/db/schema";
+import {lessons} from "@/db/schema";
 import { isAdmin } from "@/lib/admin";
 import {eq} from "drizzle-orm";
 import { NextResponse } from "next/server";
 
 export const GET = async (
     req: Request,
-    {params} : {params: {courseId: number}},
+    {params} : {params: {lessonId: number}},
 )=>{
 
     if(!isAdmin())
@@ -14,8 +14,8 @@ export const GET = async (
         return new NextResponse("Unauthorized", {status:403});
     }
 
-    const data = await db.query.courses.findFirst({
-        where: eq(courses.id,params.courseId),
+    const data = await db.query.lessons.findFirst({
+        where: eq(lessons.id,params.lessonId),
     });
 
     return NextResponse.json(data);
@@ -24,7 +24,7 @@ export const GET = async (
 
 export const PUT = async (
     req: Request,
-    {params} : {params: {courseId: number}},
+    {params} : {params: {lessonId: number}},
 )=>{
 
     if(!isAdmin())
@@ -33,16 +33,16 @@ export const PUT = async (
     }
 
     const body = await req.json();
-    const data = await db.update(courses).set({
+    const data = await db.update(lessons).set({
         ...body,
-    }).where(eq(courses.id, params.courseId)).returning();
+    }).where(eq(lessons.id, params.lessonId)).returning();
 
     return NextResponse.json(data[0]);
 };
 
 export const DELETE = async (
     req: Request,
-    {params} : {params: {courseId: number}},
+    {params} : {params: {lessonId: number}},
 )=>{
 
     if(!isAdmin())
@@ -50,7 +50,7 @@ export const DELETE = async (
         return new NextResponse("Unauthorized", {status:403});
     }
 
-    const data = await db.delete(courses).where(eq(courses.id,params.courseId)).returning();
+    const data = await db.delete(lessons).where(eq(lessons.id,params.lessonId)).returning();
 
     return NextResponse.json(data[0]);
 };
